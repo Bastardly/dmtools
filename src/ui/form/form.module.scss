@@ -1,0 +1,39 @@
+@import "styles/index.scss";
+
+.textField {
+  width: 100%;
+  font-size: 16px;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.diceDefaultRoll {
+  margin-right: 10px;
+}
+
+label {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: $baseSpace;
+  border: $border;
+  margin-bottom: 12px;
+  width: 100%;
+  box-sizing: border-box;
+
+  span.labelText {
+    font-size: small;
+    font-family: "Roboto", sans-serif;
+    color: $fontMutedColor;
+    padding-left: 3px;
+  }
+
+  input {
+    border: none;
+    outline: none;
+
+    &:focus {
+      background: $inputFocusColor;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+@import "./styles/mixins.scss";
+@import "./styles/variables.scss";
+
+.App {
+  display: flex;
+  flex-direction: column;
+  width: 1000px;
+  max-width: 90vw;
+  margin: 0 auto;
+  padding: $baseSpace;
+}
+
+.appContainer {
+  display: flex;
+  width: 100%;
+  min-height: 90vh;
+}
+
+.sidebar {
+  @include contentBox();
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+
+  button,
+  a {
+    padding-top: 8px;
+  }
+}
+
+.contentContainer {
+  @include contentBox();
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.fontColor {
+  color: $fontColor;
+}

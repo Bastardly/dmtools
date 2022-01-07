@@ -1,0 +1,36 @@
+@import "./variables.scss";
+@import "./animations.scss";
+
+@mixin contentBox {
+  padding: $contentPadding;
+  background: $contentBg;
+  margin: $baseSpace;
+  border-radius: $borderRadius;
+  border: $border;
+  box-shadow: $box-shadow;
+}
+
+@mixin card {
+  box-shadow: $card-box-shadow;
+  padding: $cardPadding;
+  border-radius: $borderRadius;
+  border: $border;
+  background: $contentBg;
+  margin: $baseSpace;
+}
+
+@mixin fadeIn($time) {
+  animation: fadeIn $time;
+}
+
+@mixin fadeOut($time) {
+  animation: fadeOut $time;
+}
+
+@mixin slideRight($time) {
+  animation: slideRight $time forwards;
+}
+
+@mixin slideLeft($time) {
+  animation: slideLeft $time forwards;
+}

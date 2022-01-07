@@ -1,0 +1,74 @@
+@import "styles/index.scss";
+
+body {
+  background: $bodyBg;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 18px;
+  color: $fontColor;
+  height: 100vh;
+}
+
+a,
+button {
+  font-family: "Roboto", sans-serif;
+  color: $actionColor;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: left;
+  padding: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.isActive {
+    color: red;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    filter: saturate(0.5);
+  }
+}
+
+h1,
+h2,
+h3 {
+  text-transform: capitalize;
+  font-weight: 600;
+  margin: 0 0 20px;
+  color: $headerColor;
+}
+
+textarea {
+  resize: vertical;
+  outline-color: $actionColor;
+}
+
+input,
+textarea {
+  &:focus {
+    background: $inputFocusColor;
+  }
+}
+
+.block {
+  display: block;
+}
+
+p:first-child {
+  margin-top: 0;
+}
+
+.card {
+  @include card();
+}

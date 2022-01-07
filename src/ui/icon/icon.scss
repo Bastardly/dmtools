@@ -1,0 +1,45 @@
+@import "styles/index.scss";
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.rotate {
+  animation-name: spin;
+  animation-duration: 4000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  margin: 10px;
+}
+
+.clickable {
+  color: $actionColor;
+  border-radius: 50%;
+  outline: 1px solid transparent;
+  cursor: pointer;
+
+  :hover {
+    fill: rgb(231, 235, 252);
+    outline: 1px solid $actionColor;
+
+    &:not(svg) {
+      outline: none;
+    }
+  }
+}
+
+.card {
+  @mixin card {
+    background: red;
+  }
+}
+
+.baseIcon {
+  display: inline-flex;
+  align-items: center;
+}

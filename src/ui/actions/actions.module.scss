@@ -1,0 +1,48 @@
+@import "styles/index.scss";
+
+.nameContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $baseSpace;
+}
+
+.nameDialogContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.nameElement {
+  padding-top: $contentPadding;
+}
+
+.createButtonContainer {
+  @include card();
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: $contentPadding;
+  height: 40px;
+  position: sticky;
+  z-index: 5;
+  bottom: -20px;
+  font-size: 1rem;
+
+  &.highlighted {
+    button {
+      font-size: 1.3rem;
+      @include fadeIn(1.5s);
+    }
+  }
+}
+
+.iconRight {
+  color: $callToAction;
+  margin-left: $contentPadding;
+  @include slideLeft(1s);
+}
+
+.iconLeft {
+  color: $callToAction;
+  margin-right: $contentPadding;
+  @include slideRight(1s);
+}

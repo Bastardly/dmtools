@@ -1,0 +1,49 @@
+@import "styles/index.scss";
+
+.enemyEdit {
+  background-color: #eee;
+  margin-bottom: 20px;
+  @include card();
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  input {
+    margin-right: 10px;
+  }
+
+  textarea {
+    background: white;
+  }
+}
+
+.enemyContainer {
+  display: grid;
+  grid-template-columns: 200px 90px 90px 90px 90px 90px;
+  gap: 8px;
+  margin-top: 10px;
+
+  span {
+    font-size: small;
+  }
+
+  &.enemyContainerHeader {
+    font-weight: bold;
+  }
+}
+
+.enemyField {
+  margin-bottom: 10px;
+  border: $border;
+  padding: $baseSpace;
+}
+
+.enemyDead {
+  color: red;
+}
+
+.enemyContainerFullSpan {
+  grid-column: span 5;
+  font-size: 0.9em;
+  opacity: 0.8;
+}

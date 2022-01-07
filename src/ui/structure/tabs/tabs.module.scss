@@ -1,0 +1,10 @@
+@import "styles/index.scss";
+.tabContainer {
+  display: flex;
+  padding: $baseSpace;
+  align-self: flex-end;
+
+  a {
+    padding: 4px 8px 0;
+  }
+}
