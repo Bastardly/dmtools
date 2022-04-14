@@ -47,3 +47,9 @@
   font-size: 0.9em;
   opacity: 0.8;
 }
+
+.enemyOptionsContainer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  margin: $defaultSpacing 0;
+}

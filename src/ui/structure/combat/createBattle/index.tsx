@@ -19,6 +19,13 @@ function createEnemy(enemyTemplate: IEnemyTemplate): IEnemy {
   };
 }
 
+function reviveEnemy(enemy: IEnemy): IEnemy {
+  return {
+    ...enemy,
+    hitpoints: rollDices(enemy.hitPointSetting),
+  };
+}
+
 export function EnemyBattle() {
   const [rollId, setRollId] = useState(-1);
   const [enemyEditMode, setEnemyEditMode] = useState(false);
@@ -26,7 +33,11 @@ export function EnemyBattle() {
   const {
     state: {
       activeCombatId,
-      data: { combat, enemyTemplates },
+      data: {
+        combat,
+        enemyTemplates,
+        settings: { rollInitiativeEachRound, initiative },
+      },
     },
     actions: { updateCreateCombat },
   } = useAppContext();
@@ -40,6 +51,13 @@ export function EnemyBattle() {
     const newEnemy = createEnemy(enemyTemplate);
     activeCombat.enemies.push(newEnemy);
     updateCreateCombat(activeCombatId, activeCombat);
+  };
+
+  const reviveAllEnemies = () => {
+    if (window.confirm("This will reset all HPs?")) {
+      activeCombat.enemies = activeCombat.enemies.map(reviveEnemy);
+      updateCreateCombat(activeCombatId, activeCombat);
+    }
   };
 
   const handleChange = (name: string, value: string) => {
@@ -68,7 +86,22 @@ export function EnemyBattle() {
     updateCreateCombat(activeCombatId, activeCombat);
   };
 
-  const containerHeaderClassNames = useClassName(styles.enemyContainer, styles.enemyContainerHeader)
+  const containerHeaderClassNames = useClassName(
+    styles.enemyContainer,
+    styles.enemyContainerHeader
+  );
+
+  const rollNewInitiative = () => {
+    activeCombat.enemies = activeCombat.enemies.map((enemy) => ({
+      ...enemy,
+      initiativeRoll: rollDices({
+        ...initiative,
+        modifier: enemy.initiativeModifier,
+      }),
+    }));
+
+    updateCreateCombat(activeCombatId, activeCombat);
+  };
 
   const sortedEnemies = () => {
     const living: IEnemy[] = [];
@@ -93,8 +126,6 @@ export function EnemyBattle() {
     return <div>Please select an item in the side menu</div>;
   }
 
-
-
   return (
     <div>
       <Input
@@ -105,15 +136,21 @@ export function EnemyBattle() {
         onChange={handleChange}
         className="block"
       />
-      <div className="flex">
-        <EnemyTemplateSelect
-          setActiveTemplateId={setActiveTemplateId}
-          activeTemplateId={activeTemplateId}
-        />{" "}
-        <button disabled={!activeTemplateId} onClick={addEnemy}>
-          Add Enemy
-        </button>
-        <div className="flex-grow" />
+      <div className={styles.enemyOptionsContainer}>
+        <div>
+          <EnemyTemplateSelect
+            setActiveTemplateId={setActiveTemplateId}
+            activeTemplateId={activeTemplateId}
+          />{" "}
+          <button
+            disabled={!activeTemplateId}
+            onClick={addEnemy}
+            className="buttonSpaceL"
+          >
+            Add Enemy
+          </button>
+        </div>
+
         <button onClick={() => setEnemyEditMode(!enemyEditMode)}>
           {enemyEditMode ? "Disable edit mode" : "Enable edit mode"}
         </button>
@@ -125,9 +162,28 @@ export function EnemyBattle() {
         value={activeCombat.note}
       />
       {!enemyEditMode && (
-        <button onClick={() => setRollId(new Date().getTime())}>
-          Roll new round
-        </button>
+        <div className={styles.enemyOptionsContainer}>
+          <div>
+            <button
+              onClick={() => setRollId(new Date().getTime())}
+              className="buttonSpaceR"
+            >
+              Roll new round
+            </button>
+            <button
+              onClick={rollNewInitiative}
+              hidden={rollInitiativeEachRound}
+            >
+              Roll new initiative
+            </button>
+          </div>
+          <button
+            onClick={reviveAllEnemies}
+            title="Will reroll all hitpoints for each enemy"
+          >
+            Revive all enemies
+          </button>
+        </div>
       )}
       {!enemyEditMode && (
         <div className={containerHeaderClassNames}>

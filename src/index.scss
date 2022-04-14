@@ -72,3 +72,11 @@ p:first-child {
 .card {
   @include card();
 }
+
+.buttonSpaceL {
+  margin-left: $defaultSpacing
+}
+
+.buttonSpaceR {
+  margin-right: $defaultSpacing
+}
