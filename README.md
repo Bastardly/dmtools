@@ -1,4 +1,4 @@
-# About this project
+# About this (WIP) project
 This is a tool to help Dungeon Masters keep track of the story, NPC's, places etc. And help them during combat.
 
 It is primarily created with D&D in mind.
